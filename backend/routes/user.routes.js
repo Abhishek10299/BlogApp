@@ -5,7 +5,7 @@ import { verifyJWT } from "../middlewares/auth.middlewares.js";
 const route = Router();
 
 route.post(
-  "/singup",
+  "/signup",
   upload.fields([{ name: "profilePicture", maxCount: 1 }]),
   signup
 );
