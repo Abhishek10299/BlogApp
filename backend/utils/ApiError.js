@@ -1,17 +1,16 @@
 class ApiError extends Error {
   constructor(
     statusCode,
-    message = "something went wrong",
-    errors = [],
+    message = "Something went wrong",
+    error = [],
     stack = ""
   ) {
-    super(message); //this is error.message from error classs
+    super(message);
     this.statusCode = statusCode;
-    this.data = null; //In error there is no data
+    this.data = null;
     this.message = message;
-    this.success = false; //success should be false in case of error
-    this.errors = errors;
-
+    this.success = false;
+    this.error = error;
     if (stack) {
       this.stack = stack;
     } else {
@@ -19,13 +18,4 @@ class ApiError extends Error {
     }
   }
 }
-
-export { ApiError };
-
-//supper(message)
-//status code
-//data
-//message            these are stander data we should return is error
-//success
-//error
-//stack
+export default ApiError;

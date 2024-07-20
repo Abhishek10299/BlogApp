@@ -1,15 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
-
+import jwt from "jsonwebtoken"
 const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
+      require: true,
       unique: true,
       lowercase: true,
       trim: true,
@@ -17,25 +13,21 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
+      require: true,
       unique: true,
       lowercase: true,
       trim: true,
     },
     password: {
       type: String,
-      require: [true, "Password is required"],
+      require: [true, "password is require"],
       minlength: 6,
     },
     fullName: {
       type: String,
-      required: true,
+      require: true,
       trim: true,
       index: true,
-    },
-    profilePicture: {
-      type: String,
-      required: true,
     },
     refreshToken: {
       type: String,
@@ -44,11 +36,11 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", function (next) {
   if (!this.isModified("password")) {
     return next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = bcrypt.hash(this.password, 10);
   next();
 });
 
